@@ -1,0 +1,36 @@
+flowchart LR
+  startNode["Запуск робота"] --> checkVigruzka["Проверить файл vigruzka.csv в Papka"]
+  checkVigruzka --> checkOtchet["Проверить файл otchet.csv в Papka"]
+  checkOtchet --> files{"Оба файла на месте"}
+  files -->|"нет"| writeErrMissing["Записать текст целиком: Не найден файл для сверки"]
+  writeErrMissing --> noRashMissing["Не создавать и не затирать rashozhdeniya.csv"]
+  noRashMissing --> exitMissing["Выйти"]
+  files -->|"да"| readCsv["Прочитать колонки nomer, summa, status из обоих файлов"]
+  readCsv --> normalize["Для каждой строки: nomer = trim(nomer), status = trim(status), summa как число"]
+  normalize --> dup{"Повтор номера в одном файле"}
+  dup -->|"да"| writeErrDup["Записать текст целиком: Повторяется номер в одном файле"]
+  writeErrDup --> noRashDup["Не собирать расхождения, не трогать rashozhdeniya.csv"]
+  noRashDup --> exitDup["Выйти"]
+  dup -->|"нет"| keepTables["Держать две таблицы в памяти; пустой список без повторов — не сбой"]
+  keepTables --> sverit["sverit(vigruzka, otchet) -> rashozhdeniya: ключ nomer после trim"]
+  sverit --> keys["nomerov = число разных номеров во множестве ключей выгрузки и отчёта"]
+  keys --> where{"Где есть nomer"}
+  where -->|"только в выгрузке"| onlyV["tip=net-v-otchete; summa_otchet и status_otchet пусто"]
+  where -->|"только в отчёте"| onlyO["tip=net-v-vigruzke; summa_vigruzka и status_vigruzka пусто"]
+  where -->|"в обоих"| cmpSum{"сумма как число совпадает"}
+  cmpSum -->|"нет"| rowSumma["одна строка tip=summa даже если статус тоже разный; оба значения суммы и статуса видны"]
+  cmpSum -->|"да"| cmpStatus{"статус без пробелов по краям совпадает"}
+  cmpStatus -->|"нет"| rowStatus["tip=status; оба значения суммы и статуса видны"]
+  cmpStatus -->|"да"| skipMatch["совпавшие номер, сумма и статус в список не входят"]
+  onlyV --> afterEach
+  onlyO --> afterEach
+  rowSumma --> afterEach
+  rowStatus --> afterEach
+  skipMatch --> afterEach["После всех nomer: совпавшие в список не входят"]
+  afterEach --> groups["Три группы: 1 сумма или статус, 2 net-v-otchete, 3 net-v-vigruzke"]
+  groups --> sortGroup["Внутри группы сортировать nomer как текст; пустая группа — не сбой"]
+  sortGroup --> countRash["rashozhdeniy = длина списка"]
+  countRash --> formatSum["Сумма без лишних нулей после запятой"]
+  formatSum --> buildCsv["UTF-8 CSV с запятой: nomerov; rashozhdeniy; заголовок; три группы"]
+  buildCsv --> writeWhole["Записать Papka/rashozhdeniya.csv целиком новым файлом, не дописывать"]
+  writeWhole --> done["Готово"]

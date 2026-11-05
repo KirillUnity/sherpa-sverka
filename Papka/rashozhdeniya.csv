@@ -1,0 +1,6 @@
+nomerov,4
+rashozhdeniy,3
+tip,nomer,summa_vigruzka,summa_otchet,status_vigruzka,status_otchet
+summa,102,500,450,оплачен,оплачен
+net-v-otchete,103,200,,новый,
+net-v-vigruzke,104,,300,,оплачен
