@@ -1,0 +1,62 @@
+﻿{
+  "Version": "1.25",
+  "IsDarkTheme": true,
+  "ProductVersion": "1.4.4.40291",
+  "References": {
+    "Items": [
+      "Microsoft.CSharp",
+      "System",
+      "System.Core",
+      "System.Data",
+      "System.Data.DataSetExtensions",
+      "System.Deployment",
+      "System.IO",
+      "System.Linq",
+      "System.Net.Http",
+      "System.Text.Encoding",
+      "System.Web",
+      "System.Windows.Forms",
+      "System.Xml"
+    ]
+  },
+  "Properties": {
+    "RobotName": "",
+    "RobotVersion": "",
+    "Description": "Сверка двух таблиц",
+    "AllowedRunWithoutConfirm": true,
+    "DisableVisibleInParams": false,
+    "DisableVisibleOutParams": false,
+    "TotalBlockExecutionDelay": 0,
+    "InParams": [
+      {
+        "Name": "Papka",
+        "Type": "Text",
+        "TypeField": "ShortText",
+        "Title": "",
+        "Description": "Рабочая папка с vigruzka.csv и otchet.csv"
+      }
+    ],
+    "OutParams": [],
+    "Settings": [],
+    "PythonModules": "",
+    "ModelAutoDesigner": "",
+    "ModelAIServer": ""
+  },
+  "Folders": [
+    {
+      "RelativePath": "",
+      "Folders": [],
+      "Files": [
+        {
+          "RelativePath": "sverka.process",
+          "Main": true,
+          "Showing": true,
+          "Pinned": false
+        }
+      ],
+      "Links": []
+    }
+  ],
+  "Files": [],
+  "Links": []
+}

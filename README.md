@@ -62,8 +62,9 @@ Sherpa Designer ставится без лицензии. Чтобы прогн�
 | Путь | Зачем |
 | --- | --- |
 | `README.md` | Как получить лицензию, куда класть файлы и три проверки из задания |
-| `robot/sverka.sherpa` | Проект Sherpa Designer |
-| `robot/sverka.process` | Диаграмма сверки; самодельной проверки лицензии в ней нет |
+| `robot/sverka.sherpa` | Проект Sherpa Designer 1.44 |
+| `robot/sverka.process` | Живая диаграмма Designer (Start, проверка файлов, FileWrite, InvokeExpression) |
+| `robot/_build-process.ps1` | Сборка `sverka.process` из блоков библиотеки Sherpa |
 | `robot/progon-kontrakta.ps1` | Прогон контракта диаграммы, если Sherpa Assistant здесь нельзя запустить |
 | `samples/vigruzka.csv` | Учебная выгрузка шага 1 |
 | `samples/otchet.csv` | Учебный отчёт шага 1 |
